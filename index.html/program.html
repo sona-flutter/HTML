@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Surprise</title>
+    <title>Swipe Love Messages</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,29 +14,28 @@
             margin: 0;
             background-color: #ffebee;
         }
+        .container {
+            text-align: center;
+        }
         .card {
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
             max-width: 300px;
+            margin-bottom: 20px;
+            position: relative;
         }
         .heart {
             color: red;
             font-size: 48px;
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
         .message {
             font-size: 18px;
             margin-top: 20px;
         }
-        .surprise-btn {
+        .swipe-btn {
             background-color: #ff4081;
             color: white;
             border: none;
@@ -46,7 +45,7 @@
             margin-top: 20px;
             transition: background-color 0.3s;
         }
-        .surprise-btn:hover {
+        .swipe-btn:hover {
             background-color: #e91e63;
         }
         .hidden {
@@ -55,18 +54,31 @@
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="heart">❤️</div>
-        <div class="message">You mean the world to me!</div>
-        <button class="surprise-btn" onclick="revealSurprise()">Click for a surprise!</button>
-        <div id="surprise" class="hidden">
-            <p>🎉 I love you! 🎉</p>
+    <div class="container">
+        <div class="card" id="card1">
+            <div class="heart">❤️</div>
+            <div class="message">You are my sunshine on a cloudy day.</div>
         </div>
+
+        <div class="card hidden" id="card2">
+            <div class="heart">💖</div>
+            <div class="message">Every moment with you is a dream come true.</div>
+        </div>
+
+        <div class="card hidden" id="card3">
+            <div class="heart">💕</div>
+            <div class="message">You make my heart skip a beat.</div>
+        </div>
+
+        <button class="swipe-btn" onclick="swipeCard()">Swipe for more</button>
     </div>
 
     <script>
-        function revealSurprise() {
-            document.getElementById('surprise').classList.remove('hidden');
+        let currentCard = 1;
+        function swipeCard() {
+            document.getElementById(`card${currentCard}`).classList.add('hidden');
+            currentCard = (currentCard % 3) + 1;  // Cycle through the cards
+            document.getElementById(`card${currentCard}`).classList.remove('hidden');
         }
     </script>
 </body>
